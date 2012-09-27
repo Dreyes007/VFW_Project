@@ -21,17 +21,17 @@
     <body>
 	    <h1>GP'eS</h1>
 	    <h2>You are our Consultant!</h2>
-	    <form action=""method="post">
-	    	<fieldset>
+	    <form action="" method="post">	    
+	    	<fieldset> 
 		    	<legend>Guest Information</legend>
 		    	<ul>
-			    	<li><label for="fname">Full Name:</label><input type="text"id="fname" /></li>
-			    	<li><label for="email">Email:</label><input type="text"id="email"placeholder="Example@Email.com" /></li>
-			    	<li><label for="phone">Phone Number:</label><input type="text"placeholder="123 123-4567" /></li>
+			    	<li><label for="fname">Full Name:</label><input type="text" id="fname" /></li>
+			    	<li><label for="email">Email:</label><input type="text" id="email" placeholder="Example@Email.com" /></li>
+			    	<li><label for="phone">Phone Number:</label><input type="text" placeholder="123 123-4567" /></li>
 				</ul>
 				<legend>Gender</legend>
 				<ul>					
-					<li><label for="male">Male:  </label><input type="radio"checked value="Male" id="male" name="sex" /></li>
+					<li><label for="male">Male:  </label><input type="radio" checked value="Male" id="male" name="sex" /></li>
 					<li><label for="female">Female:  </label><input type="radio" value="Female" id="female" name="sex" /></li>
 					<li><label for="undecided">Undecided:  </label><input type="radio" value="Undecided" id="undecided" name="sex" /></li>
 				</ul>
@@ -39,26 +39,34 @@
 				<ul>
 					<li><label for="18-24">18 to 24 years: </label><input type="checkbox" value="18 to 24 years" id="18-24" name="age" /></li>
 					<li><label for="25-35">25 to 35 years: </label><input type="checkbox" value="25 to 35 years" id="25-35" name="age" /></li>
-					<li><label for="35+">35+:  </label><input type="checkbox"checked="" value="35+" id="35+" name="age" /></li>
+					<li><label for="35+">35+:  </label><input type="checkbox" checked="" value="35+" id="35+" name="age" /></li>
 				</ul>
 	    	</fieldset>	    	
 	    	<fieldset>
 		    	<legend>Survey Information</legend>
-		    	<li>
-		    	
-		    		<label for="establishment">Establishment Visited</label>
-		    		<select id="establishment">
-		    			<optgroup label="Restaurants">
-		    				<option value="Chili's">Chili's</option>
-		    				<option value="Applebee's">Applebee's</option>
-		    				<option value="Hooters">Hooters</option>
-		    			</optgroup>
-		    			<optgroup label="Retail">
-			    			<option value="Wal-Mart">Wal-Mart</option>
-			    			<option value="Target">Target</option>
-		    			</optgroup>
-		    		</select>		    					    	
-		    	</li>
+		    	<ul>
+		    		<li>		    	
+		    			<label for="establishment">Establishment Visited</label>
+		    			<select id="establishment">
+		    				<optgroup label="Restaurants">
+		    					<option value="Chili's">Chili's</option>
+		    					<option value="Applebee's">Applebee's</option>
+		    					<option value="Hooters">Hooters</option>
+		    				</optgroup>
+		    				<optgroup label="Retail">
+			    				<option value="Wal-Mart">Wal-Mart</option>
+			    				<option value="Target">Target</option>
+			    			</optgroup>
+			    		</select>		    					    	
+			    	</li>			    	
+			    	<ul>
+			    		<li><label for="date">Date of Visit</label>	<input type="date"  min="2011-01-31" max="2013-01-31"  id="date" name="date" required 							aria-required="true" /></li>
+			    		<li><label for="time">How would you rate your experience</label> <input type="range" min="1" max="5" id="time" name="name" /></li>		    			</ul>
+			       	<li><label for="comments">Additional comments about your visit: </label> <textarea id="comments">Type answer here</textarea></li>
+			       	<li><input type="hidden" value="true" /></li>				       			       
+		    	</ul>
 	    	</fieldset>
+	    	<input type="submit" value="send survery" />
+	    </form>
     </body>
     
