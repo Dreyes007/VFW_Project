@@ -3,3 +3,27 @@ Daniel Reyes
 VFW-1210
 Project 2
 */
+
+h1{
+	margin: 10px 20px;
+	border: solid #000000;
+	padding: 10px;
+	background-color: #f59505;
+	width: 30%;
+	font-style: oblique;
+	font-family: sans-serif;
+	color: maroon;
+		
+}
+h2{
+	margin: 10px 20px;
+	font-style: oblique;
+	font-family: sans-serif;
+	color: maroon;
+}
+
+legend{
+	margin: 10px 20px;
+	background-color: #f59505;
+	
+}
