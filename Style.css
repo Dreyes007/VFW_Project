@@ -8,7 +8,7 @@ h1{
 	margin: 10px 20px;
 	border: solid #000000;
 	padding: 10px;
-	background-color: #f59505;
+	background-color: #E1DFD3;
 	width: 30%;
 	font-style: oblique;
 	font-family: sans-serif;
@@ -19,11 +19,35 @@ h2{
 	margin: 10px 20px;
 	font-style: oblique;
 	font-family: sans-serif;
-	color: maroon;
+	color: olive;
 }
 
 legend{
 	margin: 10px 20px;
-	background-color: #f59505;
-	
+	font-style: italic;
+	font-style: oblique;
+	font-size: large;
+	font-family: sans-serif;
+	color: maroon;			
+}
+
+label{
+	display: block;	
+}
+li{
+	font-style: oblique;
+	font-family: sans-serif;
+	color: maroon;
+	line-height: 23px;
+}
+aside{
+	font-style: oblique;
+	font-family: sans-serif;
+	color: maroon;
+}
+
+fieldset{
+	margin: 10px 20px;
+	border: solid #000;
+	background-color: #E1DFD3;
 }
