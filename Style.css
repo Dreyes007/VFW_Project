@@ -4,6 +4,10 @@ VFW-1210
 Project 2
 */
 
+html{
+	background-color: #bcaf95;
+}
+
 h1{
 	margin: 10px 20px;
 	border: solid #000000;
@@ -19,7 +23,7 @@ h2{
 	margin: 10px 20px;
 	font-style: oblique;
 	font-family: sans-serif;
-	color: olive;
+	color: #4D4B39;
 }
 
 legend{
