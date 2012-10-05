@@ -26,10 +26,28 @@ window.addEventListener("DOMContentLoaded", function () {
 			makeSelect.appendChild(makeOption);
 		}
 		selectLi.appendChild(makeSelect);
+		
 	}
-	
+	//Find value of selected radion button
+	function getSelectedRadio(){
+		var radios = document.forms[0].sex;
+		for(var i=0 i<radios.length; i++){
+			if(radios[i].checked){
+				sexValue = radios[i].value;
+			}						
+		}
+	}
+	function getCheckboxValue(){
+		if($('18-24').checked){
+			ageValue = $('18-24').value;
+		}else{
+			ageValue = "No"
+		}
+	}
 	function storeData(){
 		var id 				= Math.floor(Math.random()*100000001);
+		getSelectedRadion()
+		getCheckboxValue()		
 		var item			= {};
 			item.fname		= ["First Name:", $('fname').value];
 			item.lname		= ["Last Name:", $('lname').value];	
@@ -40,12 +58,14 @@ window.addEventListener("DOMContentLoaded", function () {
 			item.date		= ["Date of Visit:", $('date').value];
 			item.time 		= ["Rate your Experience:", $('time').value];
 			item.comments	= ["Additional Comments:", $('comments').value];
-			
+		locaStorage.selectItem(id, json.stringify(item));
 	}
 	
 	
 	//variable default
-	var establishmentGroups ["--Choose an Establishment", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"];
+	var establishmentGroups ["--Choose an Establishment", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],
+		sexValue,
+		ageValue = "No"
 	chooseASpot();
 	
 	
