@@ -4,16 +4,16 @@
 // Oct 14
 
 // DOM Readiness
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function(){
 
-	//fuction getElementById
-	function $(x) {
+	//fuction getElementByIdaddItem.html
+	function $(x){
 		var theElement = document.getElementById(x);
 		return theElement;		
 	}
 	
 	//Select field element populated with options
-	function chooseASpot() {
+	function chooseASpot(){
 		var formTag = document.getElementsByTagName("form");
 			selectLi = $('select'),
 			makeSelect = document.createElement('select');
@@ -44,6 +44,27 @@ window.addEventListener("DOMContentLoaded", function () {
 			ageValue = "No"
 		}
 	}
+	
+	function toggleControls(n){
+		switch(n){
+			case "on":
+				$('surveyform').style.display = "none";
+				$('clear').style.display = "inline";
+				$('displayData').style.display = "none";			
+			    break;
+			case "off":
+				$('surveyform').style.display = "block";
+				$('clear').style.display = "inline";
+				$('displayData').style.display = "inline";
+				$('items').style.display = "none";			
+			    break;
+			default:
+				return false;
+			
+		}
+	}
+	
+	
 	function storeData(){
 		var id 				= Math.floor(Math.random()*100000001);
 		getSelectedRadion()
@@ -59,6 +80,48 @@ window.addEventListener("DOMContentLoaded", function () {
 			item.time 		= ["Rate your Experience:", $('time').value];
 			item.comments	= ["Additional Comments:", $('comments').value];
 		locaStorage.selectItem(id, json.stringify(item));
+		alert("Contact Saved");
+	}
+	
+	function getData(){
+		toggleControls("on");
+		if(localStorage.length == 0){
+			alert("There is no data in Local Storage.");
+		}
+		var makeDiv = document.createElement('div');
+		makeDiv.setAttribute("id", "items");
+		var makeList = document.createElement('ul');
+		makeDiv.appendChild(makeList);
+		document.body.appendChild(makeDiv);
+		$('items').style.display = "block";
+		for(var i=0, len=localStorage.length; i<len;i++){
+			makeList.appendChild(makeLi);
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			var obj = JSON.parse(value);
+			var makeSubList = document.createElement('u');
+			makeLi.appendChild(makeSubList);
+			for(var n in obj){
+				var makeSubLi = document.createElement('li');
+				makeSubList.appendChild(makeSubLi);
+				var optSubText = obj[n][0]+" "+obj[n][1];
+				makeSubLi.innerHTML = optSubText;
+			
+			}
+			
+		}
+	}
+	function clerLocal(){
+		if(localStorage.length === 0){
+			alert("There is no data to clear.")
+			
+		}else{
+			localStorage.clear();
+			alert("All information has been deleted!");
+			window.location.reload();
+			return false;
+		}
+		
 	}
 	
 	
@@ -70,10 +133,10 @@ window.addEventListener("DOMContentLoaded", function () {
 	
 	
 	//Set link & Submit click events
-	/*var displayData = $('display data');
+	var displayData = $('display data');
 	displayData.addEventListener("click", getData);
 	var clearSurvey = $('clear');
-	clearSurvey.addEventListener("click", clearSurvey);*/
+	clearSurvey.addEventListener("click", clearLocal);
 	var submitSurvey = $('submit');
 	submitSurvey.addEventListener("click", storeData);
 			
