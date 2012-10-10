@@ -79,7 +79,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.date		= ["Date of Visit:", $('date').value];
 			item.time 		= ["Rate your Experience:", $('time').value];
 			item.comments	= ["Additional Comments:", $('comments').value];
-		locaStorage.selectItem(id, json.stringify(item));
+		locaStorage.setItem(id, json.stringify(item));
 		alert("Contact Saved");
 	}
 	
@@ -110,7 +110,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubLi.innerHTML = optSubText;
 				makeSubList.appendChild(linksLi)			
 			}
-			makeItemsLinks(localStorage.key(i) linksLi); // create edit and delete buttons/link for each item in local storage.
+			makeItemsLinks(localStorage.key(i),linksLi); // create edit and delete buttons/link for each item in local storage.
 		}
 	}
 	//Make Item Links
@@ -121,10 +121,15 @@ window.addEventListener("DOMContentLoaded", function(){
 		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit Survey Information";
-		//editLink.addEventListener("click", editItem);
+		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
-	
+		
+		//add line break
+		var breakTag = document.createElement('br');
+		linksLi.appendChild(breakTag);
+		
+		//Delete single Item link
 		var deleteLink = document.createElement('a');
 		deleteLink.href = "#";
 		deleteLink.key = key;
@@ -136,7 +141,29 @@ window.addEventListener("DOMContentLoaded", function(){
 		
 	}
 	
-	
+	function editItem(){
+		//Grab the data from our item on local storage
+		var value = locaStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		
+		//Show the form
+		toggleControls("off");
+		
+		//Populate form with with current local storage values.
+		$('fname').value = item.fname[1];
+		$('lname').value = item.lname[1];
+		$('email').value = item.email[1];
+		$('phone').value = item.phone[1];
+		var radios = document.forms[0].sex;
+		for(var i=0; i<radios.length; i++){
+			if(radios[i].value == "Male" && item.sex[1] == "Male"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "Female" && item.sex[1] == "Female"){
+				radios[i].setAttribute("checked", "checked");
+			}
+		}
+		
+	}
 	
 	function clearLocal(){
 		if(localStorage.length === 0){
@@ -148,7 +175,13 @@ window.addEventListener("DOMContentLoaded", function(){
 			window.location.reload();
 			return false;
 		}
-		
+		if(item.favorite[1] == "Yes"){
+			$('fav').setAttribute("checked", "checked");							
+		}
+		$('select').value = item.select[1];
+		$('date').value = item.select[1];
+		$('time').value = item.select[1];
+		$('comments').value = item.select[1];
 	}
 	
 	
