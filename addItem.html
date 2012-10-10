@@ -15,18 +15,19 @@
         <meta name="viewport" content="target-desintydpi=device-dpi" />
         <meta name="HandheldFriendly" content="true">
         <meta name="MobileOptimize" content="320"/>
+        <Title>GP'eS</Title>
         <link rel="stylesheet" href="Style.css" type="text/css" />                                                            
     </head>
     <body>
-	    <h1 id="test">GP'eS</h1>
+	    <header><h1 id="test">GP'eS</h1></header>
 	    <h2>"you are our consultant"</h2>
 	    <nav>
 		    <a href="#" id="clear">Clear Survey</a>
 		    <a href="#" id="displayData">Display Data</a>
-		    
+		    <a href="addItem.html" id="addNew" style="display:none;">Add New Item</a>
 	    </nav>
-	    <form action="#" method="post">	    
-	    	<fieldset> 
+	    <form action="#" method="post" id="informationForm" />	    
+	    	<fieldset id="surveyFieldset"> 
 		    	<legend>Guest Information</legend>
 		    	<ul>
 			    	<li><label for="fname">First Name:</label><input type="text" id="fname" /></li>

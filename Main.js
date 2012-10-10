@@ -17,8 +17,8 @@ window.addEventListener("DOMContentLoaded", function(){
 		var formTag = document.getElementsByTagName("form");
 			selectLi = $('select'),
 			makeSelect = document.createElement('select');
-			makeSelect.attributes("id", "establishment");
-		for(var i=0 j=establishmentGroups.length; i<j i++){
+			makeSelect.setAttribute("id", "establishment");
+		for(var i=0, j=establishmentGroups.length; i<j; i++){
 			var makeOption = document.createElement('option');
 			var optText = establishmentGroups[i];
 			makeOption.setAttribute("value", optText);
@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	//Find value of selected radion button
 	function getSelectedRadio(){
 		var radios = document.forms[0].sex;
-		for(var i=0 i<radios.length; i++){
+		for(var i=0; i<radios.length; i++){
 			if(radios[i].checked){
 				sexValue = radios[i].value;
 			}						
@@ -48,12 +48,12 @@ window.addEventListener("DOMContentLoaded", function(){
 	function toggleControls(n){
 		switch(n){
 			case "on":
-				$('surveyform').style.display = "none";
+				$('informationForm').style.display = "none";
 				$('clear').style.display = "inline";
 				$('displayData').style.display = "none";			
 			    break;
 			case "off":
-				$('surveyform').style.display = "block";
+				$('informationForm').style.display = "block";
 				$('clear').style.display = "inline";
 				$('displayData').style.display = "inline";
 				$('items').style.display = "none";			
@@ -95,6 +95,8 @@ window.addEventListener("DOMContentLoaded", function(){
 		document.body.appendChild(makeDiv);
 		$('items').style.display = "block";
 		for(var i=0, len=localStorage.length; i<len;i++){
+			var makeLi = document.createElement('li');
+			var linksLi = document.createElement('li');
 			makeList.appendChild(makeLi);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
@@ -106,12 +108,24 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubList.appendChild(makeSubLi);
 				var optSubText = obj[n][0]+" "+obj[n][1];
 				makeSubLi.innerHTML = optSubText;
-			
+				makeSubList.appendChild(linksLi)			
 			}
-			
+			makeItemsLinks(localStorage.key(i)); // create edit and delete buttons/link for each item in local storage.
 		}
 	}
-	function clerLocal(){
+	//Make Item Links
+	//Create the edit and delete links for each of the Items when displayed.
+	function makeItemLinks(){
+	//add edit single item link
+	var editLink = document.createElement('a');
+	editLink.href = "#";
+	editLink.key = key;
+		
+	}
+	
+	
+	
+	function clearLocal(){
 		if(localStorage.length === 0){
 			alert("There is no data to clear.")
 			
@@ -126,18 +140,18 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	
 	//variable default
-	var establishmentGroups ["--Choose an Establishment", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],
+	var establishmentGroups = ["--Choose an Establishment--", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],
 		sexValue,
 		ageValue = "No"
 	chooseASpot();
 	
 	
 	//Set link & Submit click events
-	var displayData = $('display data');
+	var displayData = $('displayData');
 	displayData.addEventListener("click", getData);
 	var clearSurvey = $('clear');
 	clearSurvey.addEventListener("click", clearLocal);
-	var submitSurvey = $('submit');
+	var submitSurvey = $('save');
 	submitSurvey.addEventListener("click", storeData);
 			
 });
