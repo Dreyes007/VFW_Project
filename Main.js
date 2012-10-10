@@ -110,16 +110,29 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubLi.innerHTML = optSubText;
 				makeSubList.appendChild(linksLi)			
 			}
-			makeItemsLinks(localStorage.key(i)); // create edit and delete buttons/link for each item in local storage.
+			makeItemsLinks(localStorage.key(i) linksLi); // create edit and delete buttons/link for each item in local storage.
 		}
 	}
 	//Make Item Links
 	//Create the edit and delete links for each of the Items when displayed.
-	function makeItemLinks(){
-	//add edit single item link
-	var editLink = document.createElement('a');
-	editLink.href = "#";
-	editLink.key = key;
+	function makeItemLinks(key, linksLi){
+		//add edit single item link
+		var editLink = document.createElement('a');
+		editLink.href = "#";
+		editLink.key = key;
+		var editText = "Edit Survey Information";
+		//editLink.addEventListener("click", editItem);
+		editLink.innerHTML = editText;
+		linksLi.appendChild(editLink);
+	
+		var deleteLink = document.createElement('a');
+		deleteLink.href = "#";
+		deleteLink.key = key;
+		var deleteText = "Delete Information";
+		//deleteLink.addEventListener("click", deleteItem);
+		deleteLink.innerHTML = deleteText;
+		linksLi.appendChild(deleteLink);
+	
 		
 	}
 	
