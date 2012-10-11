@@ -76,6 +76,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.phone		= ["Phone Number:", $('phone').value];
 			item.sex		= ["Sex:", sexValue];
 			item.age		= ["Age", ageValue];
+			item.select 	= ["Establishment:", $('select').value];
 			item.date		= ["Date of Visit:", $('date').value];
 			item.time 		= ["Rate your Experience:", $('time').value];
 			item.comments	= ["Additional Comments:", $('comments').value];
@@ -162,9 +163,26 @@ window.addEventListener("DOMContentLoaded", function(){
 				radios[i].setAttribute("checked", "checked");
 			}
 		}
-		
-	}
+			if(item.favorite[1] == "Yes"){
+			$('fav').setAttribute("checked", "checked");							
+		}
+		$('select').value = item.select[1];
+		$('date').value = item.select[1];
+		$('time').value = item.select[1];
+		$('comments').value = item.select[1];
 	
+		//Remove the initial listener from the input 'Save Information' button.
+		save.removeEventListener("click", storeData);
+		//Change Submit Button value to Edit Button
+		$('submit').value = "Edit Information";
+		var editSubmit = $('submit');
+		//Save the key value establish in this function as a property of the edit submit event
+		//so we can use that value when the edited data is saved.
+		editSubmit.addEventListener("click", validate);
+		editSubmit.key = this.key;
+	
+	}
+			
 	function clearLocal(){
 		if(localStorage.length === 0){
 			alert("There is no data to clear.")
@@ -175,13 +193,30 @@ window.addEventListener("DOMContentLoaded", function(){
 			window.location.reload();
 			return false;
 		}
-		if(item.favorite[1] == "Yes"){
-			$('fav').setAttribute("checked", "checked");							
+	
+	}
+	
+	function validate(){
+		//Define the elements we want to check
+		var getfname = $('fname');
+		var getlname = $('lname');
+		var getEmail = $('email');
+		var getPhone = $('Phone');
+		
+		//Get error message
+		var messageAry = [];
+		
+		//First Name Validation
+		if(getfname.value === ""){
+			var fnameError = "Please enter a first name"
+			getfname.style.border = "1px solid red";
+			messageAry.push(fnameError);
 		}
-		$('select').value = item.select[1];
-		$('date').value = item.select[1];
-		$('time').value = item.select[1];
-		$('comments').value = item.select[1];
+		//Last Name Validation
+		if(getlname.value === ""){
+			var lnameError = "Please enter a last name"
+			getlname.style.border = "1px solid red";
+			messageAry.push(lnameError);
 	}
 	
 	
@@ -198,7 +233,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	var clearSurvey = $('clear');
 	clearSurvey.addEventListener("click", clearLocal);
 	var submitSurvey = $('save');
-	submitSurvey.addEventListener("click", storeData);
+	submitSurvey.addEventListener("click", validate);
 			
 });
 
