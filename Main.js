@@ -196,12 +196,18 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	}
 	
-	function validate(){
+	function validate(e){
 		//Define the elements we want to check
 		var getfname = $('fname');
 		var getlname = $('lname');
 		var getEmail = $('email');
 		var getPhone = $('Phone');
+		
+		//Reset Error Message.
+		errMsg.innerHTML = "";
+		getfname.style.border = "1px solid black";
+		getlname.style.border = "1px solid black";
+		getEmail.style.border = "1px solid black";
 		
 		//Get error message
 		var messageAry = [];
@@ -216,15 +222,39 @@ window.addEventListener("DOMContentLoaded", function(){
 		if(getlname.value === ""){
 			var lnameError = "Please enter a last name"
 			getlname.style.border = "1px solid red";
-			messageAry.push(lnameError);
-	}
+			messageAry.push(lnameError);			
+		}
+		//Email Validation
+		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(!(re.exec(getEmail.value))){
+			var emailError = "Please enter a valid email address";
+			getEmail.style.border = "1px solid red";
+			messageAry.push(emailError);
+		}
+		
+		//If there were errors display them on the screen.
+		if(messageAry.length >= 1){
+			for(var i=0, j=messageAry.length; i < j; i++){
+				var txt = document.createElement('li');
+				txt.innerHTML = messageAry[i];
+				errMsg.appendChild(txt);
+			}
+			e.preventDefault
+			return false;
+		}else{
+			//If all is Ok, save our Data!
+			storeData();
+			
+		}	
+			
+	}	
 	
 	
 	//variable default
 	var establishmentGroups = ["--Choose an Establishment--", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],
 		sexValue,
 		ageValue = "No"
-	chooseASpot();
+		errMsg = $('errors');
 	
 	
 	//Set link & Submit click events
