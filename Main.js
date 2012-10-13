@@ -49,13 +49,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		switch(n){
 			case "on":
 				$('informationForm').style.display = "none";
-				$('clear').style.display = "inline";
-				$('displayData').style.display = "none";			
+				$('clear').style.display = "inline";				
+				$('addNew').style.display = "inline";			
 			    break;
 			case "off":
 				$('informationForm').style.display = "block";
-				$('clear').style.display = "inline";
-				$('displayData').style.display = "inline";
+				$('clear').style.display = "inline";				
+				$('addNew').style.display = "none";
 				$('items').style.display = "none";			
 			    break;
 			default:
@@ -65,9 +65,17 @@ window.addEventListener("DOMContentLoaded", function(){
 	}
 	
 	
-	function storeData(){
-		var id 				= Math.floor(Math.random()*100000001);
-		getSelectedRadion()
+	function storeData(key){
+		//If there is not key, this means this is a  brand new Item and need a new key
+		if(!key){
+			var id 				= Math.floor(Math.random()*100000001);
+		}else{
+			//Set the id to the existing key we're editing so that it will save over the data.
+			//The key is the same key that's been passed along from the editSubmit event handler
+			//to the validate function, and then passed here into the storeData function.
+			id = key;
+		}
+		getSelectedRadio()
 		getCheckboxValue()		
 		var item			= {};
 			item.fname		= ["First Name:", $('fname').value];
@@ -242,8 +250,9 @@ window.addEventListener("DOMContentLoaded", function(){
 			e.preventDefault
 			return false;
 		}else{
-			//If all is Ok, save our Data!
-			storeData();
+			//If all is Ok, save our Data! Send the key value (Wich came from the editData function).
+			//Remember this key value was passed as through the editSubmit event listener as a property.
+			storeData(this.key);
 			
 		}	
 			

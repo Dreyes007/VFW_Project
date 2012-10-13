@@ -26,10 +26,12 @@
 		    <a href="#" id="displayData">Display Data</a>
 		    <a href="addItem.html" id="addNew" style="display:none;">Add New Item</a>
 	    </nav>
-	    <form action="#" method="post" id="informationForm" />	    
+	    <form action="#" method="post" id="informationForm">	    
 	    	<fieldset id="surveyFieldset"> 
 		    	<legend>Guest Information</legend>
-		    	<ul>
+		    	<span>* fields are required.</span>
+		    	<ul id="errors"></ul>
+		    	<ul	id="questions">
 			    	<li><label for="fname">First Name:</label><input type="text" id="fname" /></li>
 			    	<li><label for="lname">Last Name:</label><input type="text" id="lname" /></li>
 			    	<li><label for="email">Email:</label><input type="text" id="email" placeholder="Example@Email.com" /></li>
