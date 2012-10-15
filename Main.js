@@ -5,7 +5,8 @@
 
 // DOM Readiness
 window.addEventListener("DOMContentLoaded", function(){
-
+	
+	
 	//fuction getElementByIdaddItem.html
 	function $(x){
 		var theElement = document.getElementById(x);
@@ -14,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	//Select field element populated with options
 	function chooseASpot(){
-		var formTag = document.getElementsByTagName("form");
+		var formTag = document.getElementsByTagName("form"),
 			selectLi = $('select'),
 			makeSelect = document.createElement('select');
 			makeSelect.setAttribute("id", "establishment");
@@ -88,8 +89,8 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.date		= ["Date of Visit:", $('date').value];
 			item.time 		= ["Rate your Experience:", $('time').value];
 			item.comments	= ["Additional Comments:", $('comments').value];
-		locaStorage.setItem(id, json.stringify(item));
-		alert("Contact Saved");
+		localStorage.setItem(id, JSON.stringify(item));
+		alert("Contact Saved!");
 	}
 	
 	function getData(){
@@ -110,7 +111,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			var obj = JSON.parse(value);
-			var makeSubList = document.createElement('u');
+			var makeSubList = document.createElement('ul');
 			makeLi.appendChild(makeSubList);
 			for(var n in obj){
 				var makeSubLi = document.createElement('li');
@@ -143,7 +144,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Information";
-		//deleteLink.addEventListener("click", deleteItem);
+		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	
@@ -152,7 +153,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	function editItem(){
 		//Grab the data from our item on local storage
-		var value = locaStorage.getItem(this.key);
+		var value = localStorage.getItem(this.key);
 		var item = JSON.parse(value);
 		
 		//Show the form
@@ -189,6 +190,17 @@ window.addEventListener("DOMContentLoaded", function(){
 		editSubmit.addEventListener("click", validate);
 		editSubmit.key = this.key;
 	
+	}
+	
+	function deleteItem(){
+		var ask = confirm("Are you sure you want to delete this information?");
+		if(ask){
+			localStorage.removeItem(this.key);
+			alert("Contact was deleted");
+			window.location.reload();
+		}else{
+			alert("Information was not deleted");
+		}
 	}
 			
 	function clearLocal(){
@@ -260,19 +272,19 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	
 	//variable default
-	var establishmentGroups = ["--Choose an Establishment--", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],
+	var establishmentGroups = ["--Choose an Establishment--", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],		
 		sexValue,
 		ageValue = "No"
 		errMsg = $('errors');
-	
+		chooseASpot();
 	
 	//Set link & Submit click events
 	var displayData = $('displayData');
 	displayData.addEventListener("click", getData);
 	var clearSurvey = $('clear');
 	clearSurvey.addEventListener("click", clearLocal);
-	var submitSurvey = $('save');
-	submitSurvey.addEventListener("click", validate);
+	var save = $('submit');
+	save.addEventListener("click", validate);
 			
 });
 
