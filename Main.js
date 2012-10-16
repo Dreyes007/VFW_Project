@@ -50,12 +50,14 @@ window.addEventListener("DOMContentLoaded", function(){
 		switch(n){
 			case "on":
 				$('informationForm').style.display = "none";
-				$('clear').style.display = "inline";				
+				$('clear').style.display = "inline";
+								
 				$('addNew').style.display = "inline";			
 			    break;
 			case "off":
 				$('informationForm').style.display = "block";
-				$('clear').style.display = "inline";				
+				$('clear').style.display = "inline";
+								
 				$('addNew').style.display = "none";
 				$('items').style.display = "none";			
 			    break;
@@ -120,7 +122,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubLi.innerHTML = optSubText;
 				makeSubList.appendChild(linksLi)			
 			}
-			makeItemsLinks(localStorage.key(i),linksLi); // create edit and delete buttons/link for each item in local storage.
+			makeItemLinks(localStorage.key(i),linksLi); // create edit and delete buttons/link for each item in local storage.
 		}
 	}
 	//Make Item Links
@@ -144,7 +146,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Information";
-		deleteLink.addEventListener("click", deleteItem);
+		//deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	
