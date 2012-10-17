@@ -1,7 +1,7 @@
 // Daniel Reyes
 // VFW-1210
-// Project 2
-// Oct 14
+// Project 4
+// Oct 18
 
 // DOM Readiness
 window.addEventListener("DOMContentLoaded", function(){
@@ -50,14 +50,12 @@ window.addEventListener("DOMContentLoaded", function(){
 		switch(n){
 			case "on":
 				$('informationForm').style.display = "none";
-				$('clear').style.display = "inline";
-								
+				$('clear').style.display = "inline";								
 				$('addNew').style.display = "inline";			
 			    break;
 			case "off":
 				$('informationForm').style.display = "block";
-				$('clear').style.display = "inline";
-								
+				$('clear').style.display = "inline";								
 				$('addNew').style.display = "none";
 				$('items').style.display = "none";			
 			    break;
@@ -98,7 +96,8 @@ window.addEventListener("DOMContentLoaded", function(){
 	function getData(){
 		toggleControls("on");
 		if(localStorage.length == 0){
-			alert("There is no data in Local Storage.");
+			alert("There is no data in Local Storage so default data was added.");
+			autoFillData();
 		}
 		var makeDiv = document.createElement('div');
 		makeDiv.setAttribute("id", "items");
@@ -125,6 +124,17 @@ window.addEventListener("DOMContentLoaded", function(){
 			makeItemLinks(localStorage.key(i),linksLi); // create edit and delete buttons/link for each item in local storage.
 		}
 	}
+	
+	//Auto Populate Local Storage
+	function autoFillData(){
+		//The actual JSON OBJECT data required for this to work is coming from our json.js file which is loaded from our HTML page.
+		//Store JSON OBJECT into local storage.
+		for(var n in json){
+			var id = Math.floor(Math.random()*100000001);
+			localStorage.setItem(id, JSON.stringify(json[n]));
+		}
+	}
+	
 	//Make Item Links
 	//Create the edit and delete links for each of the Items when displayed.
 	function makeItemLinks(key, linksLi){
@@ -146,7 +156,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Information";
-		//deleteLink.addEventListener("click", deleteItem);
+		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	
@@ -174,7 +184,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				radios[i].setAttribute("checked", "checked");
 			}
 		}
-			if(item.favorite[1] == "Yes"){
+		if(item.age[1] == "Yes"){
 			$('fav').setAttribute("checked", "checked");							
 		}
 		$('select').value = item.select[1];
@@ -198,10 +208,10 @@ window.addEventListener("DOMContentLoaded", function(){
 		var ask = confirm("Are you sure you want to delete this information?");
 		if(ask){
 			localStorage.removeItem(this.key);
-			alert("Contact was deleted");
+			alert("Information was deleted");
 			window.location.reload();
 		}else{
-			alert("Information was not deleted");
+			alert("Information was NOT deleted");
 		}
 	}
 			
@@ -276,7 +286,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	//variable default
 	var establishmentGroups = ["--Choose an Establishment--", "Chili's", "Applebee's", "Hooters", "Wal-Mart", "Target"],		
 		sexValue,
-		ageValue = "No"
+		ageValue = "No",
 		errMsg = $('errors');
 		chooseASpot();
 	
