@@ -45,7 +45,7 @@ label{
 li{
 	font-style: oblique;
 	font-family: sans-serif;
-	color: maroon;
+	color: #E1DFD3;
 	line-height: 23px;
 }
 aside{
@@ -58,4 +58,28 @@ fieldset{
 	margin: 10px 20px;
 	border: solid #000;
 	background-color: #E1DFD3;
+}
+
+output{
+	position: absolute;
+	background-image: linear-gradient(top, #444444, #999999);
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	color: white;
+	border-radius: 10px;
+	display: inline-block;
+	font: bold 15px/30px Georgia;
+	bottom: 175%;
+	left: 0;
+}
+output:after{
+	content: "";
+	position: absolute;
+}
+.questions{
+	margin: 20px;
+	padding: 30px; 
+	border: solid #000; 
+	background-color: #4D4B39;	
 }

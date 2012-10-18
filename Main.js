@@ -290,7 +290,8 @@ window.addEventListener("DOMContentLoaded", function(){
 			
 		}	
 			
-	}	
+	}
+			
 	
 	
 	//variable default
@@ -299,7 +300,8 @@ window.addEventListener("DOMContentLoaded", function(){
 		ageValue = "No",
 		errMsg = $('errors');
 		chooseASpot();
-	
+		
+		
 	//Set link & Submit click events
 	var displayData = $('displayData');
 	displayData.addEventListener("click", getData);
