@@ -83,3 +83,7 @@ output:after{
 	border: solid #000; 
 	background-color: #4D4B39;	
 }
+a:link{color: blue;}
+a:visited{color: red;}
+a:hover{color: gray;}
+a:active{color: black;}
